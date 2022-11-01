@@ -1,6 +1,5 @@
 from subprocess import run
 
-
 class Event:
     def __init__(self, json_event):
         self.json_event = json_event

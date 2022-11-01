@@ -18,7 +18,7 @@ def send_email(body):
     msg['Subject'] = SUBJECT
     msg['From'] = SENDER
     msg['To'] = RECEIVER
-    password = APP_PASSWORD 
+    password = APP_PASSWORD
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(body)
 

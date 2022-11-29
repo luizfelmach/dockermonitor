@@ -31,10 +31,10 @@ def send_email(body):
 
 def dispatcher(event_json):
     event = Event(event_json)
-    print(event.name())
-    print(event.logs())
-    print("\n\n")
-
+    body = f"O container {event.name()} está off!"
+    if(event.exit_code()):
+        send_email(body)
+    
 def main():
     docker_events = "docker events --filter event=die --format '{{json .}}'"
     process = Popen(docker_events, shell=True, stdout=PIPE, stderr=STDOUT)

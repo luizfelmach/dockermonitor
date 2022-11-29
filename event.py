@@ -23,3 +23,9 @@ class Event:
         ]
         out = run(command, capture_output=True, text=True)
         return out.stderr
+
+    def exit_code(self):
+        return int(self.json_event["Actor"]["Attributes"]["exitCode"])
+
+    def all(self):
+        return self.json_event

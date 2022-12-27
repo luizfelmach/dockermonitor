@@ -33,7 +33,10 @@ def dispatcher(event_json):
     event = Event(event_json)
     body = f"O container {event.name()} está off!"
     if(event.exit_code()):
-        send_email(body)
+        try:
+            send_email(body)
+        except:
+            print("Could not send email!")
     
 def main():
     docker_events = "docker events --filter event=die --format '{{json .}}'"
@@ -42,7 +45,10 @@ def main():
     with process.stdout:
         for line in iter(process.stdout.readline, b''):
             json_string = line.decode("utf-8").strip()
-            dispatcher(json.loads(json_string))
+            try:
+                dispatcher(json.loads(json_string))
+            except:
+                print("Could not run dispatcher function!")
 
 if __name__ == "__main__":
     main()
